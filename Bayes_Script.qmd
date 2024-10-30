@@ -213,11 +213,29 @@ in the following there is the results of RT-PCR hospital-administrated for more 
 
 library(tidyverse)
 
-Confusion_tibble<- tibble(c("Postive", "Negative"), 
-                           c(308, 580), 
-                           c(105, 21))
+#general set-zp of a confusion matrix
+confusion_general <- tibble(test = c("negative", "positive"), 
+                           infected = c("false_n","true_p"), 
+                           healthy  = c("true_n", "false_p"))
 
 
+confusion_tibble<- tibble(test_result = c("negative", "positive"), 
+                           infected = c(308, 580), 
+                           healthy = c(105, 21))
+
+
+confusion_results <- list(
+  false_n = confusion_tibble$infected[1],   # test negative actual infected: 308
+  true_p = confusion_tibble$infected[2],    # test positive actual infected: 580
+  true_n = confusion_tibble$healthy[1],     # test negative actual healthy: 105
+  false_p = confusion_tibble$healthy[2]     # test positive actual healthy: 21
+)
+
+PCR_sensitivity <- true_p/sum(confusion_tibble$infected)
+PCR_specificity <- true_n/sum(confusion_tibble$healthy)
+
+
+print(confusion_results)
 
 
 ```
