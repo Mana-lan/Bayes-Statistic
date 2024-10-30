@@ -1,9 +1,10 @@
 ---
 title: "Script Bayes Statistic"
 author: "Mathias Nägele, Andreas Busjahn"
+bibliography: Bayes_references.bib
 format: 
   docx:
-    reference-doc: D:/1) Mathias/Internship/Stochastical Models/template_1.docx
+    #reference-doc: D:/1) Mathias/Internship/Stochastical Models/template_1.docx
     toc: true
     toc-depth: 3
 execute:
@@ -14,41 +15,44 @@ fig.dpi: 150
 fig-width: 6
 fig-height: 4
 editor: visual
-##link-citations: true
+#citations: 
+#  style: numeric
 ---
 
 ## The Bayes Theorem
 
-General speaking: it is about to came from effect back to cause, this is the inductive form to gain knowledge by the calculus of probability, it is often called inverse probability (not the best term ever)
+Bayesian statistics allows us to go from what is known – the data (the results of the coin throw here) – and extrapolate backwards to make probabilistic statements about the parameters (the underlying bias of the coin) of the processes that were responsible for its generation
+
+The Bayesian statistics allows us to go from what is known – the data (e.g. the results of a coin throw) and go backwards to make probabilistic statements about the parameters (e.g. is it a fair coin that means is the parameter of the corresponding binomial distribution 0.5) of the processes that were responsible for its generation [@Lambert]. It is to come from effect (probability is the effect significant) back to cause, it is often called inverse probability (not the best term ever, because there is a connotation from pure mathematics, better was reverse or backwards) or Bayesian inference. This is generally speaking the inductive form to gain knowledge.
 
 ### History
 
-We start with a general criticism of the inductive form for gaining knowledge, because this was a driving force for the discovery of the Bayes Theorem.\
-David Hume (1711 – 1776, Scottish philosopher, economist and historian) argues that ‘causes and effects are discoverable, not by reason, but by experience’. In other words, we can never be certain about the cause of a given effect. For example, we know from experience that if we push a glass off the side of a table, it will fall and shatter, but this does not prove that the push caused the glass to shatter. It is possible that both the push and the shattering are merely correlated events, reflecting some third, and hitherto unknown, ultimate cause of both 1). He formulate the well non dilemma of correlation (two effects show similarities but are caused by an unknown common cause) or true cause.
+We start with a general criticism of the inductive form for gaining knowledge, because this was a driving force for the development of the Bayes Theorem.\
+David Hume (1711 – 1776, Scottish philosopher, economist and historian) argues that "causes and effects are discoverable, not by reason, but by experience". In other words, we can never be certain about the cause of a given effect. For example, we know from experience that if we push a glass off the side of a table, it will fall and shatter, but this does not prove that the push caused the glass to shatter. It is possible that both the push and the shattering are merely correlated events, reflecting some third, and hitherto unknown, ultimate cause of both 1). He formulate the well non dilemma of correlation (two effects show similarities but are caused by an unknown common cause) or true cause.
 
-This criticism was extensively worked out in the phylosophical work "Logik der Forschung (1934) of Karl Popper (Austrian-British philosopher) . He formulated Humes finding more precise and postulated that a theory/cause can only be falsified never verified, as it is applied in the Null-Hypothesis test which is tried to be falsified. But it does not make a postulated cause more possible, the falsification merely says the no-effect can be discarded if it is proved that to observe the effect based on the Null-hypothesis is very unlikely, hence the effect and cause should be clearly distinguished. The effect might be statistical proven, but what is the cause is not clarified. The cause is often "proven" by exposing/observing the system under investigation by different levels of the postulated cause and is then investigated by ANOVA, regression or the other tools of machine learning.
+This criticism was extensively worked out in the philosophical work "Logik der Forschung (1934) of Karl Popper (Austrian-British philosopher) . He formulated Humes finding more precise and postulated that a theory/cause can only be falsified never verified, as it is applied in the Null-Hypothesis test (there it is the question if the Null-Hypothesis can be falsified). But it does not make a postulated cause more possible. The falsification merely says the no-effect can be discarded, hence there is an effect, because the corresponding probability to find such an effect level under the distribution given as the Null-Hypothesis is low (e.g. 5%). The effect might be statistical proven, but the cause is still not clarified. The cause is often "proven" by exposing/observing the system under investigation by different levels of the postulated cause and is then investigated by ANOVA, regression or the other tools of machine learning.
 
-Anyway, common sense and obvious facts out of experience should not be ignored by reason of pure philosophy. Of course, the false clause from merely correlation to be declared as a cause is a danger and should be taken into account. Learning is very often an inductive process from special effects summarized at the end in a common cause. Here the Bayesian Theorem can help to trace back an effect to a cause. Furthermore from a theoretical point of view the Bayes theorem is derived out of the basic axioms of the calculus of probability, there is no approximation or other fancy assumptions, it is pure mathematics and a genius insight. What is made out of this is as always in statistics, another story.
+Anyway, common sense and obvious facts out of experience should not be ignored by reason of pure philosophy. Of course, the false clause from merely correlation to be declared as a cause is a danger and should be taken into account. Learning is very often an inductive process from special effects summarized at the end in a common cause. Here the Bayesian Theorem can help to trace back an effect to a cause. Furthermore from a theoretical point of view the Bayes theorem is derived out of the basic axioms of the calculus of probability, there is no approximation or other fancy assumptions, it is pure mathematics and a genius insight. What is made out of it, as always in statistics, is another story.
 
-Thomas Bayes ( 1701 – 1761 English statistician, philosopher and Presbyterian minister)
+Thomas Bayes ( 1701 – 1761 English statistician, philosopher and Presbyterian )
 
-Bayes thought about how to apply mathematics, specifically probability theory, to the study of cause and effect (the motivation for him to think about it, is not exactly known up to date). It is about to get a better information out of a previous (a priori) results, experience etc. At the end he was able to formulate the law of *conditional probability*. The experiment (not a very exited one) he made to come to his law is described in *Link oder referenzieren* .
+Bayes thought about how to apply mathematics, specifically probability theory, to the study of cause and effect (the motivation for him to think about it, is not exactly known up to date, the response to the criticism of Hume cam later in). It is about to get a better information out of a previous (a priori) results, experience etc. At the end he was able to formulate the law of *conditional probability*. The experiment (not a very exited one, but instructive) he made to come to his law is described in *Link oder referenzieren* .
 
-Ít was presented to the Rocal Sciety, but it seems that Bayes himself was perhaps not keen about it, and never published his work, Bayes's solution to a problem of [inverse probability](https://en.wikipedia.org/wiki/Inverse_probability "Inverse probability") was presented by his friend Richard Price to the [Royal Society](https://en.wikipedia.org/wiki/Royal_Society "Royal Society")  in [*An Essay Towards Solving a Problem in the Doctrine of Chances*](https://en.wikipedia.org/wiki/An_Essay_Towards_Solving_a_Problem_in_the_Doctrine_of_Chances "An Essay Towards Solving a Problem in the Doctrine of Chances"), which was read in 1763 after Bayes's death when he worked on it for two years– correcting some mistakes and adding references – and eventually sent it to the Royal Society. His intention was to have a way to counter Hume’s attack on causation (see above) and was at least partially motivated by religious question. Hume’s argument was unsettling to Christianity because God was traditionally known as the First Cause of everything. The mere fact that the world exists was seen as evidence of a divine creator that caused it to come into existence . Hume’s argument meant that we can never deal with absolute causes; rather, we must make do with probable causes (perhaps it all came out of the Big Bang, but what was the cause of the Big Bang, a spontaneous disporoportioning of energy?). This weakened the link between a divine creator and the world that we witness and, hence, undermined a core belief of Christianity. *Link oder referenzieren*.
+Ít was presented to the Rocal Sciety, but it seems that Bayes himself was perhaps not keen about it, and never published his work, Bayes's solution to a problem of [inverse probability](https://en.wikipedia.org/wiki/Inverse_probability "Inverse probability") was presented by his friend Richard Price (1723 -1791, Welsh moral philosopher, Nonconformist minister) to the [Royal Society](https://en.wikipedia.org/wiki/Royal_Society "Royal Society")  in [*An Essay Towards Solving a Problem in the Doctrine of Chances*](https://en.wikipedia.org/wiki/An_Essay_Towards_Solving_a_Problem_in_the_Doctrine_of_Chances "An Essay Towards Solving a Problem in the Doctrine of Chances"), which was read in 1763 after Bayes's death when he worked on it for two years– correcting some mistakes and adding references – and eventually sent it to the Royal Society. His intention was to have a way to counter Hume’s attack on causation (see above) and was aslos motivated by religious questions. Hume’s argument was unsettling to Christianity because God was traditionally known as the First Cause of everything. The mere fact that the world exists was seen as evidence of a divine creator that caused it to come into existence . Hume’s argument meant that we can never deal with absolute causes; rather, we must make do with probable causes (perhaps it all came out of the Big Bang, but what was the cause of the Big Bang, a spontaneous disproportionation of energy given matter and anit-matter?). This weakened the link between a divine creator and the world that we witness and, hence, undermined a core belief of Christianity. *Link oder referenzieren*.
 
-Independently of Bayes, Pierre-Simon Laplace (1749 – 1827 mathematician, physicist, astronomer philosopher) had already begun to work on a probabilistic way to go from effect back to cause (inverse probability), and in 1774 he get notice by the work of Bayes and Price and gave him confidence to pursue his ideas. Laplace still needed an example application of his method that was easy enough for him to calculate, yet interesting enough to garner attention. His sample comprised the numbers of males and females born in Paris from 1745 to 1770. This data was easy to work with because the outcome was binary – the child was recorded as being born a boy or girl – and was large enough to be able to draw conclusions from it. In the sample, a total of 241945 girls and 251527 boys were born hence a total of 493472 births were considered. Laplace used this sample and his theory of inverse probability to estimate that there was a probability of approximately 10 ^−42^ that the sex ratio favored girls rather than boys. On the basis of this tiny probability, he concluded that he was as ‘certain as any other moral truth’ that boys were born more frequently than girls (OK, I´m not totally convinced if he really stated it like that, because an equal birth rate seems to me not excluded like that, or?). This was the first practical application of Bayesian inference as we know it now. Laplace went from an effect – the data in the birth records – to determine a probable cause – the ratio of male to female births. Later in his life, Laplace also wrote down the first modern version of Bayes’ mathematical rule that is used today, where causes could be given different prior probabilities. Hence it would be more accurate to call the Bayesian inference theory as the Bayes–Price– Laplace rule.
+Independently of Bayes, Pierre-Simon Laplace (1749 – 182,7 France mathematician, physicist, astronomer, philosopher) had already begun to work on a probabilistic way to go from effect back to cause (inverse probability), and in 1774 he get notice by the work of Bayes and Price and gave him confidence to pursue his ideas. Laplace still needed an example application of his method that was easy enough for him to calculate, yet interesting enough to garner attention. His sample comprised the numbers of males and females born in Paris from 1745 to 1770. This data was easy to work with because the outcome was binary – the child was recorded as being born a boy or girl – and was large enough to be able to draw conclusions from it. In the sample, a total of 241945 girls and 251527 boys were born hence a total of 493472 births were considered. Laplace used this sample and his theory of inverse probability to estimate that there was a probability of approximately 10 ^−42^ that the sex ratio favored girls rather than boys. On the basis of this tiny probability, he concluded that he was as ‘certain as any other moral truth’ that boys were born more frequently than girls. This was the first practical application of Bayesian inference as we know it now. Laplace went from an effect – the data in the birth records – to determine a probable cause – the ratio of male to female births is not 50:50 on the bases of the data). Later in his life, Laplace also wrote down the first modern version of Bayes’ mathematical rule that is used today, where causes could be given different prior probabilities. Hence it would be more accurate to call the Bayesian inference theory as the Bayes–Price– Laplace rule.
 
 ### Theory of Bayesian theorem explained by Laplace\` data on birth rate
 
 The “easy” example chosen by Laplace can be used to get the basic idea of Bayesian statistic. It is also a good learning about calculating with the concept of (conditional) probability which is the basics of Bayesian statistics and that may had been the intention of Laplace.  
 
-Let us first clarify some vocabulary of probability theory with the births example (or if you like it more flipping a coin which can simulate birth rate of 0.5 if the coin is fair). The language and the laws are based on the set theory.
+But let us first clarify some vocabulary of probability theory with the births example (or if you like it more flipping a coin which can simulate birth rate of 0.5 if the coin is fair). The language and the laws are based on the set theory.
 
-An elementary event $\omega$ is a possible result of a random "experiment", in the example of births it is "Girl" or "Boy" or. The event space $\Omega = \{ \text{Girl}, \text{Boy} \}$ is the set containing all possible results of the random experiment.
+An elementary event $\omega$ is a possible result of a random "experiment", in the example of births it is "birth of a girl" or "birth of a boy" or. The event space birth$\Omega = \{ \text{Girl}, \text{Boy} \}$ is the set containing all possible results of the random experiment.
 
-Now we can define partial sets A of the event space $\Omega$ in our case a partial case can be $A= \{ \text{Girl}\}$ or $B= \{ \text{Boy}\}$ . At this point the experiment flipping a coin is a little bit unfortunate because in the case of binary data "A" correponds to the elemtary event $\omega$ too. If there was more then two elementary events the definition of partial sets makes more sense e.g $\Omega= \{ \text{blue, red, yellow}\}$ then a subset is $A= \{ \text{blue, yellow}\}$ .
+Now we can define partial sets A of the event space $\Omega$ in our case a partial case can be $A= \{ \text{Girl}\}$ or $B= \{ \text{Boy}\}$ . At this point the experiment flipping a coin is a little bit unfortunate because in the case of binary data "A" correponds to the elemtary event $\omega$ too. If there was more then two elementary events the definition of partial sets makes more sense e.g a die with six different colored sides: $\Omega= \{ \text{blue, red, yellow, white, black, brown}\}$ then a subset is $A= \{ \text{blue, yellow}\}$ .
 
-Now its getting picky: A Random variable X is the result of a function which assigns to each object or aspect of an object a figure. Please be aware it is not a number with a value but a label hence a categorical number. It makes it easier in mathematics and in programming. The R-object of a factor is doing that:
+Now its getting picky: A Random variable X is the result of a function which assigns to each object or aspect of an object a figure. Please be aware, at this point, it is not a number with a value but a label hence a categorical number. It makes it easier in mathematics and in programming. The R-object of a factor is doing that:
 
 ```{r, echo=TRUE}
 
@@ -66,30 +70,28 @@ color_die <- factor(c("blue", "red", "yellow", "white", "black", "brown"))
 
 ```
 
-Let us define the sub set $A = \{ \text{blue}, \text{yellow}\}$ Now we can express them with the random variable:
+Let us define the sub set $A = \{ \text{blue}, \text{red}\}$ Now we can express them with the random variable:
 
-$A = \{ \text{X=1 or X=2}\}$ or$A = \{ \text{X>3}\}$ the last expression shows you the advantage of using random variables instead of the possible elemental events.
+$A = \{ \text{X=1 or X=2}\}$ or shorter $A = \{ \text{X>3}\}$ the last expression shows you the advantage of using catogorial numbers instead of the name of elemental events .
 
 Finally we came to the central and very intuitive term of probability. Laplace defined the probability to be
 
 $P(A |\Omega)\ =\ \frac{number\ of\ elementary\ events\ in\ A}{total\ number\ of\ elementary\ events\ \Omega}$
 
-The term $P(A|\Omega)$ is expressed as "the probability of A given B" .It is often just given as $P(A)$ if $\Omega$ is an event space and not only a partial set.\
-A prerequisite is that all elementary events have the same probability and the events are independent from each other and have a finit number elements.
+The term $P(A|\Omega)$ is expressed as "the probability of A given B" .It is often just given as $P(A)$ if $\Omega$ is an event space and not only a partial set because then it is $P(\Omega) =1$. The prerequisite for this definition of probability is that all elementary events have the same probability and have a finite number of elements (if not we speak about probability density but that´s a topic for its on and we will skip it).
 
 More simple and catchy is to say
 
 $P(A |\Omega)\ =\ \frac{number\ of\ favorable\ events\ in\ A}{number\ of\ possible\ events\ \Omega}$
 
-Exercise: Please apply the same terms and concept to a measurement of e.g mass of objects:\
-- Is the mass of an object (apple, peach etc. ) an elementary even in the sense of Laplace? No measurements of the mass will chose certain events more likely than others, hence the prerequisite of same probability is not fullfilled
+\
+Is e.g. the measurement (relization of a random event) of the mass of an object (apple, peach etc. ) an elementary even in the sense of Laplace? No measurements of the mass will chose certain events more likely than others, hence the prerequisite of same probability is not fulfilled. Furthermore the value space has not a finite number, it is a continuum. In this case we cannot even speak from a probability of a value, but it is a probability density, which has an infinitesimal low value. Only the integration over a certain range of probability density will return a value of a probability.
 
--   Is a value of a measurement the realization of a random variable? /= yes, 10.011 kg is an an event of the random variable X. X comprises all possible values e.g 10.011 kg which might be observed after a measurement.\
--   Out of which space the random values esteem ? /= it is the space of all real numbers equal or bigger then zero - Why the "true value" can be seen as a label of the object? /= it is a concept and is not observable. Only in the case of the primordail mass in Paris which had getting a arbitrary mass of 1 kg the "true value", labled value was known at the time it was defined. - But what an intuitive approximation of the true value might tell you? /= The a priori knowledge about the order of magnitude a random variables can have, hence the probability of the realization of a random variable So we are not primarely looking on the value of a random variable but its probability to occur.
+In the case of a coin or a dice we can see the true value after toss the object. But in case of measurements like the mass on an object, we have to speak about a "true value". But this true value is a concept and is not observable. Only in the case of the primordial mass in Paris which had getting a arbitrary mass of 1 kg the "true value", is a labeled value and was known at the time it was defined. All derived objects are compared to the mass and will have some more or less minimal deviations. Here is one of the principal difference between the frequentic view on probability and the Bayesian approach. The first says there is a "true value" and the more measurment values you get the more you will reach the "true value", hence the true value is not a random variable but a fixed value. Each convidence interval (CI) is constructed around the so called excpected value (often mean value) which is the random variable and not around the true value. The CI is constructed on the with the same distribution as the H0 Hypothesis. Given the P-value \< 0.05%, this means, if you take several samples from a population and calculate a CI for each of these samples, about 95% of these intervals would include the true value of the entire population. But if the measurement is highly accurate (small CI) but there is a bias in this the measurement, hence it is incorrect at a certain degree, the CI might even not contain the true value in extreme cases. On the other hand the Bayesian statistics do not handle the concept of a true value of a paramter but probability distribution around an a priori value of the parameter and furtheron there might be more information then you get another distribution around an a posterior value with the Bayes statistic.
 
-Later on we will see how the realization of physicalas a random varialbe can be modeled by out of elementary events.
+### Elementary events and normal distribution
 
-Please create with an R script a loop generating 10 elementary events with a random number generator of floating numbers between the interval \[0,1\]. The elementary events should have all the same probability. Calculate the mean value and do it 10, 100 and 1000 times in a loop. Display the results in a histogram.What can you say about the shape of the distribution. Test the mean values for normality for the data of the mean values.
+Please create with an R script a loop generating 10 elementary events with a random number generator of floating numbers between the interval \[0,1\] (as per defintion the elementary events should have all the same probability). Calculate the mean value and do it 10, 100 and 1000 times ... in a loop. Display the results in a histogram.What can you say about the shape of the distribution. Test the distribution of the mean values for normality.
 
 ```{r, echo=TRUE}
 library(ggplot2)
@@ -123,17 +125,17 @@ kstest_mean_values <- ks.test(x = mean_values,
 
 ```
 
-Hence, what we can see is that means calculated out of sets with even low number of elementary events (which have per definition the same probability and are therefore uniformly distributed) are approaching a normal distributed. Out of data having only the information about the interval where the random data can be found, we get structured information with a much higher information of the normal distribution. This is a demonstration why normal distribution is so central in statistics. Furthermore each measurement can be seen as a combination of elementary events.
+What we can see is that for means calculated out of sets with (even low) numbers of elementary events (which have per definition the same probability and are therefore uniformly distributed) are approaching a normal distribution. Out of data having only the information about the interval where the random data can be found, we get structured information with a much higher "content" of information in form of the normal distribution. This demonstrated why normal distribution is so central in statistics. Furthermore each measurement can be seen as a combination of many elementary events.
 
 We have seen the principal notations and the definition of probability we go now further steps to the conditional probability and finally to the Bayes (Price, Laplace) Theorem or "inverse probability" and what is all about. Those vocabulary can be shown in a tree diagram. We use other birth data to make it more clear (pure binary birth data are not so interesting at this point, because no conditional probability can be drawn out).
 
-## The twin data
+## Twin data
 
-The propability that twins ar monozygotic is about 1/4 (in Europe) and of course they have all the time the same sex. Given we have the elementary event $\omega$ of twins and we define the possible results of the elemetary event as Monozygotic twins = M Dizygotic twins = D
+The propability that twins ar monozygotic is about 1/4 (in Europe) and of course they have all the time the same sex. Given we have the elementary event $\omega$ of twins and we define the possible results of the elementary event as Monozygotic twins = M Dizygotic twins = D
 
 The event space $\Omega = (M, D)$
 
-Hence the probabilities for the two possible outcomes given there are twins is $P(T | \Omega)=1/4, P(DT| \Omega)=3/4$ So that's the wording and symbol for a conditional probability. Now we look on the second event of Twins have the identical sex ($I$) or not (the C stands for complementary, hence for not having the same sex) ($I^C$). Given the twins are monozygotic, the probability is $P(I | M)=1$ and $P(I^C| M)=0$ they are both either female or male, for the dizygotical twins it is: $P(I | M)=P(I^C| D)=1/2$
+Hence the probabilities for the two possible outcomes given there are twins is $P(M | \Omega)=1/4, P(D |\Omega)=3/4$ So that's the wording and symbol for a conditional probability. Now we look on the second event that is, twins have the identical sex ($I$) or not ($I^C$) (the C stands for complementary, hence for not having the same sex). Given the twins are monozygotic, the probability is $P(I | M)=1$ and $P(I^C| M)=0$ they are both either female or male, for the dizygotical twins it is: $P(I | D)=P(I^C| D)=1/2$ hence both the probability both hav e the same sex or not is equal and 5is 0%.
 
 Let as look on the situation with a probability tree:
 
@@ -142,11 +144,11 @@ Let as look on the situation with a probability tree:
 There are only a view rules to be recoginzed we know from the set theory :\
 1. Probabilities on a branches are multiplied\
 2. The sum of all probabilities of the different branches has to be 1.\
-3. The commutative law of intersect of sets is for the branches with for the monozygotic twins have the same sex :
+3. The commutative law of intersect of sets says the sequence of does not matter e.g. it is :
 
 $D\ \cap\ I\ =\ I\ \cap\ D$
 
-And the same is true for probabilities, we have only to go backwards on the brach:
+And the same is true for probabilities, we have only to go backwards on the branch (if the condition given the event space :
 
 $P(M)*P\left(I|M\right)=P\left(M|I\right)*P(I)$
 
@@ -154,9 +156,9 @@ Now we can rearrange this formula and get the Bayesian Theorem:
 
 $P\left(M|I\right)=\frac{P(M)*P\left(I|M\right)}{P(I)}$
 
-Hence e.g. we can answer the question what is the probability for monozygcotic twins given the babies have the same sex, if we know the terms on the right site of the formula. This is because it is often called inverse probability..
+Hence e.g. we can answer the question what is the probability for monozygcotic twins given the babies have the same sex, if we know the terms on the right site of the formula. This is because it is often called inverse probability. So we got the Bayesian Theorem, that is it.
 
-The only term we do not know yet is $P(I)$. This information we can get out of the tree diagram too. It is in principle a new smaller event space which lead to higher probabilities for the elementary events in this space. The space is identified with the frame:
+The only term we do not know yet is $P(I)$. This information we can get out of the tree diagram too. It is in principle a new smaller event space which lead to higher probabilities for the elementary events in this space. The $P(I)$ is the probability of the smaller event space $I =$ "Twins with the same sex"in the event space $\Omega$ of all Twins. The space $I$ is identified with the grey frame:
 
 ![Tree_digramm of monozygotic and dizygcotic twins with identical sex](Tree_frame_diagram.png)
 
@@ -164,9 +166,15 @@ Now we can summarize over the branches containing the state I:
 
 $P(I)=\ P(M)*P\left(I|M\right)+P(D)*P\left(I|D\right)$
 
-The formula looks quite strait forward, but the term $P(I)$ called marginal Likelihood especially is usually a monster as the name itself. To summarize over all possible state of the new "event sapace" in more complex investigations is not easy and especially in the case of continuous data integration has to be used instead of summation and numerical Monte Carlo simulation has often to be applies. That was perhaps the reason Bayes Method was not used until the introduction of the computer.
+Remark: The condition "given the event space $\Omega$" is often omitted in the notation per convention.
 
-Excerise You have following situation. Two dark boxes containg 10 balls each. In the box A there are 7 red balls and 3 white balls. In the box B there is 1 red ball and 9 white balls. Now the lady lack take out of one box a red ball. What is the probability this ball went out of the box A (inverse probability)? 1.please draw the probability tree and set up the equation to get the inverse probability, and the marginal likelihood:
+The formula looks quite strait forward, but the term $P(I)$ called marginal Likelihood especially is usually a monster as the name itself (the term Likelihood in this context make less sense and we should not much care about it, what it can be looked at is given above). To summarize over all possible state of the new "event space" in more complex investigations is not easy and especially in the case of continuous data integration has to be used instead of summation and numerical Monte Carlo (see below) simulation has often to be applied. That was perhaps the reason Bayes Method was not used until the introduction of the computer.
+
+## Exercise
+
+You have following situation. Two dark boxes containing 10 balls each. In the box A there are 7 red balls and 3 white balls. In the box B there is 1 red ball and 9 white balls. Now the lady lack take out of one box a red ball. What is the probability this ball went out of the box A (inverse probability)?
+
+1.  Please draw the probability tree and set up the equation to get the inverse probability, and the marginal likelihood:
 
 ![Tree_digramm of red and white balls in two boxes](Balls_in_boxes.png)
 
@@ -174,31 +182,45 @@ $P(A)*P\left(R|A\right)=P\left(A|R\right)*P(R)$
 
 The inverse probability the red ball went out of box A is $P\left(A|R\right)=\frac{P(A)*P\left(R|A\right)}{P(R)}$
 
+2.  Calculate the marginal likelihood
+
 The marginal likelihood is given as $P(R)=\ P(A)*P\left(R|A\right)+P(B)*P\left(R|A\right)$
 
-2.  What is the marginal Likelihood in simple words? This is nothing else then the probability to take a red ball out all the boxes. It is the probability of the subset red balls in the elementary space "balls in the boxes", there are 8 red balls within 20 balls. To draw a red ball has the probability of 8/20= 2/5. For this reason Hence P(R)
+3.  What is the marginal Likelihood in simple words? This is nothing else then the probability to take a red ball out all the boxes. It is the probability of the subset red balls in the elementary space "balls in the boxes", there are 8 red balls within 20 balls. To draw a red ball has the probability of 8/20= 2/5. For this reason $P(R)$ is:
 
 $P(R)=\frac{1}{2}*\frac{7}{10}+\frac{1}{2}*\frac{1}{10}=\frac{8}{20}$
 
-Unfortunately it is called as a Likelihood, but it is not, in fact the marginal Likelihood is a probability! Likelihood looks how good a parameter can explain the data, it is not a probability but a way to find the maximum likelihood for the data given a distribution. In the case of Gaussian distribution e.g. the maximum likelihood is the mean value. This is where confusion starts, with imprecise wording.
+*Unfortunately it is called as a Likelihood, but it is not, in fact the marginal Likelihood is a probability! Likelihood looks how good a parameter can explain the data, it is not a probability but a way to find the maximum likelihood for the data given a distribution. In the case of Gaussian distribution e.g. the maximum likelihood is the mean value. This is where confusion starts, with imprecise wording.*
 
-4.Eventually get the probability we looking for. $P(A|R)=\frac{\frac{7}{20}}{\frac{7}{20}+\frac{1}{20}}=\frac{7}{8}$
+4.  Eventually get the probability we looking for.\
+    $P(A|R)=\frac{\frac{7}{20}}{\frac{7}{20}+\frac{1}{20}}=\frac{7}{8}$
+5.  How the information: It is a red ball" change the probability in contrast to the experiment "drawing a red ball out of the boxes?
 
-And here it is obvious. The elementary space is reduced the elementary case red balls in box A (probability 7/8) and red box in box B (probability 1/8).
-
-What is the probability to draw a red ball out of the box A = 1/2\*7/10 = 7/20. This probability is much lower than that one if you know a red ball is taken so where it is coming form.There is where the intuitive is ends.
-
-2.Show the "marginal likelihood" and determine it. 3.what is "marginal likelihood" all about?
-
-How the information: It is a red ball" change the probability in contrast to the experiment "drawing a red ball out of the boxes?
-
-5.Which other random experiment resembles it now? Can you express it?
-
-Hier ist eine Inline-Formel: $P\left(p\right)=1\ for\ p\ \in[0,1]$.
+The elementary space is reduced to the elementary space 8 red balls. Given a red ball is drawn 7 of the eight balls are in box A.\
+What is the probability to draw a red ball out of the box A = 1/2\*7/10 = 7/20. This probability is much lower than that one if you know a red ball is taken so where it is coming from. Here the intuition may end.
 
 -\> Apply on a clinical data like what is the probability the test is positive the patient is ill or decision making as in differential diagnoses
 
 Up to now we have examples where we do not speak about probability distribution. The probabilities were obvious by counting or given by information Now we go to examples were the probability has to be calculated out o a distribution because counting is not possible or very cumbersome.
+
+## SARS-Cov-2 testing examined with Bayes´theorem
+
+The article of [@Bentley] discuss the error rates of test equipment for SARS-Cov-2 (Cov) under field conditions and those obtained in the laboratory. We will take some aspects which are given in the article to see how the Bayes theorem is used in a scientific investigation.
+
+in the following there is the results of RT-PCR hospital-administrated for more then 1000 patients. The RT-PCR test is seen as the "gold standard" for the determination of Cov:
+
+```{r}
+
+library(tidyverse)
+
+Confusion_tibble<- tibble(c("Postive", "Negative"), 
+                           c(308, 580), 
+                           c(105, 21))
+
+
+
+
+```
 
 ## Laplace´ data of births in Paris
 
@@ -228,7 +250,7 @@ We have given following information:
 
 $\left(\begin{matrix}t\\k_G\\\end{matrix}\right)=\frac{t!}{k_G!(t-k_G)!}$
 
-If we intrduce the numerical value we can see that the numbers to be calculated are much to small as to be handled by hand or the computer
+If we introduce the numerical value we can see that the numbers to be calculated are much to small as to be handled by hand or the computer
 
 $P(k_G=241945|\ p=0.5,\ t=493472)=\left(\begin{matrix}493472\\241945\\\end{matrix}\right){0.5}^{241945}{(1-0.5)}^{493472-241945}$
 
@@ -349,12 +371,10 @@ for the parameter p=0.5 given $k_G=241945$
 cat("a posteriori probability for the parameter",fbirths_vect[1],":",bino_dist/total_bino_dist )
 ```
 
-But this is not still end of story. He only know the paramter 0.5 given the data is very very unlikely. But he knew $P(p<0.5)\approx\ 1-P(p>0.5)$ (because $P(p=0.5 \approx\  0)$ and all higher probabilites of p get even samller he conclude $P(p<0.5)\approx\ 1$. 
-This is what Laplace get as the result. He publised it 1820 and he was as ‘certain as any other moral truth’ that
-boys were born more frequently than girls.
+But this is not still end of story. He only know the paramter 0.5 given the data is very very unlikely. But he knew $P(p<0.5)\approx\ 1-P(p>0.5)$ (because $P(p=0.5 \approx\  0)$, as we have senn above and all higher probabilities of p get even smaller he conclude $P(p<0.5)\approx\ 1$. This is what Laplace get as the result. He published it 1820 and he was as "certain as any other moral truth" that boys were born more frequently than girls.
 
 Excersice
 
-Please use the Z-test to look if the Nullypothese p=0.5 can be rejected 
+Please use the Z-test to look if the Nullypothese p=0.5 can be rejected
 
-
+# Literatur
